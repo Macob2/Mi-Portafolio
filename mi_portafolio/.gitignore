@@ -1,0 +1,8 @@
+# Excluir archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Excluir dependencias y entornos de desarrollo
+/node_modules
+/.venv/
+.vscode
