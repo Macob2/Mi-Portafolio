@@ -1,64 +1,139 @@
-/* --- Estilos Base y Tipografía (Ítem 19) --- */
+/* --- Estilos de Cuerpo/Base --- */
 body {
     font-family: 'Montserrat', sans-serif;
     line-height: 1.6;
+    margin: 0;
+    padding: 0;
 }
 
-/* Scroll Offset para la Navbar fija */
+/* Scroll Offset (para asegurar que los anclajes funcionen correctamente) */
 html {
-    scroll-padding-top: 70px; 
+    scroll-padding-top: 8vh; 
 }
 
-/* Navbar Personalizada (Ítem 33) */
+/* Agregamos un ancho máximo a los contenedores de Bootstrap para limitar el ancho de las tarjetas y contenido general */
+.container {
+    max-width: 1300px; /* Limita el ancho del contenido a un tamaño razonable en pantallas grandes */
+}
+
+/* --- Navbar Overrides --- */
 #mainNav {
-    background-color: #343a40; /* Color oscuro de Bootstrap */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* ** 1. Desactivar posición fija ** */
+    position: static !important;
+    
+    /* 2. Estilos basados en vh/vw */
+    height: 7vh; 
+    border-bottom: 0.3vh solid #007bff; 
+}
+
+.navbar-brand {
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 1.5rem !important;
 }
 
 .nav-link {
-    font-weight: 500;
-    transition: color 0.3s ease; /* 12. Efecto hover */
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 0.95rem !important;
+    text-transform: uppercase;
+    padding: 1vh 0.5vw !important; 
 }
 
-.nav-link:hover {
-    color: #007bff !important; /* Azul de énfasis */
+/* --- Secciones y Títulos --- */
+.seccion-bloque {
+    /* Relleno vertical y horizontal con vh/vw */
+    padding: 10vh 5vw !important; 
 }
 
-/* Sección Home (Hero) */
+.titulo-seccion {
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 2.5rem !important; 
+    margin-bottom: 5vh !important; 
+    text-transform: uppercase;
+    color: #007bff !important; 
+    font-family: 'Oswald', sans-serif !important;
+}
+
+/* --- Sección HOME (Hero) --- */
 #home {
-    background: url('https://via.placeholder.com/1920x600/f8f9fa/343a40?text=Fondo+de+Portafolio') no-repeat center center/cover;
-    height: 100vh;
-    display: flex; /* 17. Uso de display: flex */
-    align-items: center;
-    justify-content: center;
-    color: #343a40;
+    /* Altura ajustada */
+    min-height: 93vh; 
 }
 
-/* Estilos de Habilidades (Skills) */
-.skill-item {
-    margin-bottom: 20px;
-}
-.progress-bar {
-    background-color: #007bff;
+#home h1 {
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 4rem !important; 
 }
 
-/* Tarjetas de Portafolio */
+#home p {
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 1.5rem !important; 
+    margin-top: 3vh !important;
+    margin-bottom: 5vh !important;
+}
+
+/* Botón CTA */
+.cta-btn {
+    /* Usamos REM para estabilidad en el texto */
+    padding: 2vh 4vw !important; 
+    font-size: 1.2rem !important;
+}
+
+/* --- Sección About --- */
+.foto-perfil {
+    width: 200px !important; /* Volvemos a PX para el tamaño de la imagen, ya que vh/vw lo hacía ver mal */
+    height: 200px !important;
+    border: 0.5vh solid #1a1a1a !important;
+    border-radius: 50% !important;
+    margin-bottom: 3vh !important;
+}
+
+#about p, #about h4 {
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 1.1rem !important;
+}
+
+/* Barras de progreso de habilidades */
+.progress {
+    height: 3vh !important;
+}
+
+/* --- Sección Portafolio (Card) --- */
+
 .portfolio-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 12. Efecto hover */
-    cursor: pointer;
+    border: 0.1vh solid #ddd !important;
+    margin: 1vh !important; 
+    padding: 2vh !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
 }
-
 .portfolio-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-0.5vh) !important;
+    box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.1) !important;
+}
+.portfolio-card h5 { 
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 1.4rem !important; 
+    margin-bottom: 1vh !important; 
+}
+.portfolio-card p { 
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 0.9rem !important; 
+    margin-bottom: 2vh !important; 
+}
+.portfolio-card a, .portfolio-card button { 
+    /* Usamos REM para estabilidad en el texto */
+    font-size: 0.9rem !important; 
 }
 
-/* Media Query para Responsividad (Ítem 18) */
-@media (max-width: 992px) {
-    #home {
-        height: 60vh; /* Altura más pequeña en móvil */
-    }
-    .display-3 {
-        font-size: 2.5rem;
-    }
+/* --- Sección Contacto --- */
+#contact input, #contact textarea {
+    /* Usamos REM para estabilidad en el texto */
+    padding: 1.5vh !important;
+    margin-bottom: 2vh !important;
+    font-size: 1rem !important;
+}
+
+#contact button {
+    /* Usamos REM para estabilidad en el texto */
+    padding: 1.5vh !important;
+    font-size: 1.3rem !important;
 }

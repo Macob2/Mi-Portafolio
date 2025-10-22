@@ -3,19 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio | Desarrollador Web</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/style.css">
-    </head>
-<body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="70">
+    <title>Portafolio | Desarrollador Web con Bootstrap</title>
+    
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- Enlace a nuestro CSS personalizado (para overrides) -->
+    <link rel="stylesheet" href="static/style/style.css">
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
-        <div class="container">
+</head>
+<body>
+
+    <!-- NAV (NO FIJO: Sin la clase .fixed-top) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="mainNav">
+        <div class="container-fluid px-5">
             <a class="navbar-brand" href="#home">TU NOMBRE</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
+            <div class="collapse navbar-collapse" id="navMenu">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#about">Perfil</a></li>
                     <li class="nav-item"><a class="nav-link" href="#services">Servicios</a></li>
@@ -27,77 +33,88 @@
         </div>
     </nav>
 
-    <header id="home" class="d-flex align-items-center justify-content-center text-center">
+    <!-- HEADER/HOME -->
+    <header id="home" class="text-center d-flex align-items-center justify-content-center">
         <div class="container">
             <h1 class="display-1 fw-bold text-uppercase">FRONT-END DEVELOPER</h1>
-            <p class="lead mt-4 mb-5">Creando experiencias digitales robustas y estéticas.</p>
-            <button class="btn btn-primary btn-lg cta-btn" onclick="cambiarCTA(this)">Ver mi CV Completo</button>
+            <p class="lead mb-5">Creando experiencias digitales robustas y estéticas.</p>
+            <a class="btn btn-primary btn-lg cta-btn" href="#" role="button">Ver mi CV Completo</a>
         </div>
     </header>
 
-    <section id="about" class="seccion-bloque bg-light py-5">
+    <!-- SECCIÓN: SOBRE MÍ -->
+    <section id="about" class="seccion-bloque bg-light">
         <div class="container">
-            <h2 class="titulo-seccion text-center mb-5">Sobre Mí</h2>
-            <div class="row">
-                <div class="col-lg-4 text-center">
-                    <img src="https://via.placeholder.com/250/003366/ffffff?text=FOTO" alt="Foto profesional del desarrollador" class="foto-perfil mb-4">
+            <h2 class="titulo-seccion">Sobre Mí</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                    <img src="https://placehold.co/250x250/007bff/ffffff?text=FOTO" alt="Foto profesional del desarrollador" class="foto-perfil">
                 </div>
                 <div class="col-lg-8">
-                    <p class="fs-5">Soy un desarrollador front-end con especialización en la manipulación del DOM y arquitecturas de interfaz de usuario. Mi enfoque es crear código limpio, modular y que cumpla con los estándares de accesibilidad.</p>
+                    <p class="lead">Soy un desarrollador front-end con experiencia en la manipulación del DOM y arquitecturas de interfaz de usuario. Mi enfoque es crear código limpio, modular y que cumpla con los estándares de accesibilidad.</p>
                     <hr>
                     <h3 class="mt-4">Formación y Experiencia</h3>
-                    <section id="education" class="mt-3"> <h4>Educación</h4>
-                        <p><strong>Bootcamp Desarrollo Web Full Stack</strong> - (2023)</p>
+                    <section id="education" class="mb-3">
+                        <h4 class="h5">Educación</h4>
+                        <p class="text-muted"><strong>Programacion Liceo Comercial Vate Vicente Huidobro</strong> - (2023)</p>
                     </section>
-                    <section id="experience" class="mt-3"> <h4>Experiencia Relevante</h4>
-                        <p><strong>Práctica Desarrollador Junior</strong> - (6 meses) - Construcción de APIs y maquetación.</p>
+                    <section id="experience" class="mb-3">
+                        <h4 class="h5">Experiencia Relevante</h4>
+                        <p class="text-muted"><strong>Práctica Profesional en Banco Estado Chile</strong> - (6 meses) - Construcción de Paginas Web y Maquetación.</p>
                     </section>
-                    <section id="certifications" class="mt-3"> <h4>Certificaciones</h4>
-                        <p><strong>Manipulación del DOM avanzada</strong> - Platzi (2024)</p>
+                    <section id="certifications">
+                        <h4 class="h5">Certificaciones</h4>
+                        <p class="text-muted"><strong>Buena Utilizacion de la Ia</strong> - IBM SkillsBuild (2024)</p>
                     </section>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="seccion-bloque py-5">
+    <!-- SECCIÓN: SERVICIOS -->
+    <section id="services" class="seccion-bloque">
         <div class="container">
-            <h2 class="titulo-seccion text-center mb-5">Servicios Ofrecidos</h2>
+            <h2 class="titulo-seccion">Servicios Ofrecidos</h2>
             <div class="row text-center">
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4">
                     <h3 class="fw-bold">Maquetación</h3>
                     <p>Diseño responsivo y accesible (HTML5, CSS3/Flexbox).</p>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 mb-4">
                     <h3 class="fw-bold">Interactividad JS</h3>
                     <p>Manipulación del DOM sin frameworks y optimización de rendimiento.</p>
                 </div>
-                <div class="col-md-4">
-                    <h3 class="fw-bold">Optimización SEO</h3>
+                <div class="col-md-4 mb-4">
+                    <h3 class="fw-bold">Optimización</h3>
                     <p>Estructura semántica para mejor posicionamiento en buscadores.</p>
                 </div>
             </div>
         </div>
     </section>
     
-    <section id="skills" class="seccion-bloque bg-light py-5">
+    <!-- SECCIÓN: HABILIDADES -->
+    <section id="skills" class="seccion-bloque bg-light">
         <div class="container">
-            <h2 class="titulo-seccion text-center mb-5">Habilidades</h2>
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h4 class="mt-3">Técnicas</h4>
-                    <div class="habilidad-item">
-                        <label for="html-progress">HTML5 & CSS3</label>
-                        <div class="progress"><div class="progress-bar" id="html-progress" style="width: 90%;">90%</div></div>
+            <h2 class="titulo-seccion">Habilidades</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <h4 class="h3 mb-3">Técnicas</h4>
+                    <div class="mb-3">
+                        <label class="form-label" for="html-progress">HTML5 & CSS3</label>
+                        <div class="progress" style="height: 3vh;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 90%;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100">90%</div>
+                        </div>
                     </div>
-                    <div class="habilidad-item">
-                        <label for="js-progress">JavaScript</label>
-                        <div class="progress"><div class="progress-bar" id="js-progress" style="width: 80%;">80%</div></div>
+                    <div class="mb-3">
+                        <label class="form-label" for="js-progress">JavaScript</label>
+                        <div class="progress" style="height: 3vh;">
+                            <div class="progress-bar bg-primary" role="progressbar" style="width: 80%;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">80%</div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-6 mt-4 mt-lg-0">
-                    <h4 class="mt-3">Blandas</h4>
-                    <ul class="lista-habilidades">
+                <div class="col-lg-6">
+                    <h4 class="h3 mb-3">Blandas</h4>
+                    <ul class="list-unstyled">
                         <li>Comunicación efectiva</li>
                         <li>Gestión del tiempo</li>
                         <li>Aprendizaje rápido</li>
@@ -107,91 +124,71 @@
         </div>
     </section>
 
-    <section id="portfolio" class="seccion-bloque py-5">
+    <!-- SECCIÓN: PORTAFOLIO -->
+    <section id="portfolio" class="seccion-bloque">
         <div class="container">
-            <h2 class="titulo-seccion text-center mb-5">Portafolio</h2>
-            <div class="row row-cols-1 row-cols-md-3 g-4">
+            <h2 class="titulo-seccion">Portafolio</h2>
+            <div class="row justify-content-center">
                 
-                <div class="col">
-                    <div class="card h-100 portfolio-card" 
-                        onmouseover="resaltarCard(this)" 
-                        onmouseout="normalizarCard(this)">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Proyecto Dashboard</h5>
-                            <p class="card-text">Dashboard de ventas responsivo con grillas de Bootstrap.</p>
-                            <a href="https://github.com/tu_usuario/dashboard-repo" target="_blank" class="btn btn-primary">Ver Repositorio</a>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm portfolio-card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase">Proyecto Dashboard</h5>
+                            <p class="card-text">Dashboard de ventas simple.</p>
+                            <a href="#" target="_blank" class="btn btn-primary">Ver Repositorio</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="col" id="proyecto-2">
-                    <div class="card h-100 portfolio-card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Proyecto App Clima</h5>
-                            <p class="card-text">Uso de Fetch API para obtener datos de clima en tiempo real.</p>
-                            <button class="btn btn-danger" onclick="removerElemento(this)">Remover Tarjeta</button>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm portfolio-card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase">Proyecto App Clima</h5>
+                            <p class="card-text">Uso de Fetch API (simulado).</p>
+                            <button onclick="console.log('Remover elemento simulado')" class="btn btn-danger">Remover Tarjeta</button>
                         </div>
                     </div>
                 </div>
 
-                <div class="col">
-                    <div class="card h-100 portfolio-card">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Landing Page</h5>
-                            <p class="card-text">Diseño minimalista con CSS Grid y animaciones simples.</p>
-                            <a href="https://github.com/tu_usuario/landing-page-repo" target="_blank" class="btn btn-primary">Ver Repositorio</a>
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm portfolio-card text-center">
+                        <div class="card-body">
+                            <h5 class="card-title text-uppercase">Landing Page</h5>
+                            <p class="card-text">Diseño minimalista con CSS.</p>
+                            <a href="#" target="_blank" class="btn btn-primary">Ver Repositorio</a>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
     
-    <section id="clients" class="seccion-bloque bg-light py-5">
+    <!-- SECCIÓN: CONTACTO -->
+    <section id="contact" class="seccion-bloque bg-light">
         <div class="container">
-            <h2 class="titulo-seccion text-center mb-5">Experiencias y Clientes</h2>
+            <h2 class="titulo-seccion">Contacto</h2>
+            <p class="text-center lead mb-4">¿Hablamos? Envíame un mensaje directo.</p>
             <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <p class="lead">Demostración de interactividad avanzada (`onchange`)</p>
-                    <select id="selector-experiencia" onchange="mostrarDetalleExperiencia(this)">
-                        <option value="base" selected>Seleccione una experiencia (Educativa/Simulada)</option>
-                        <option value="cliente_a">Cliente Simulador A (UX/UI)</option>
-                        <option value="organizacion">Organización Educativa B (Colaboración)</option>
-                    </select>
-                    <div id="detalle-experiencia" class="mt-4 p-3 border">
-                        Seleccione una opción para ver los detalles.
-                    </div>
+                <div class="col-lg-8">
+                    <form>
+                        <div class="mb-3">
+                            <input type="text" class="form-control form-control-lg" placeholder="Nombre completo" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="email" class="form-control form-control-lg" placeholder="Correo electrónico" required>
+                        </div>
+                        <div class="mb-3">
+                            <textarea class="form-control form-control-lg" rows="4" placeholder="Tu mensaje..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg w-100 cta-btn">Enviar Mensaje</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="organizations" class="seccion-bloque py-5"> <div class="container">
-            <h2 class="titulo-seccion text-center mb-4">Organizaciones</h2>
-            <p class="text-center">Participación en [Centro de Estudiantes] y [Club de Programación Local].</p>
-        </div>
-    </section>
-
-    <section id="references" class="seccion-bloque bg-light py-5"> <div class="container">
-            <h2 class="titulo-seccion text-center mb-4">Referencias</h2>
-            <p class="text-center">Referencias de mentores y docentes disponibles bajo solicitud.</p>
-        </div>
-    </section>
-
-    <section id="contact" class="seccion-bloque py-5">
-        <div class="container">
-            <h2 class="titulo-seccion text-center mb-5">Contacto</h2>
-            <p class="text-center lead">¿Hablamos? Envíame un mensaje directo.</p>
-            <form class="mx-auto" style="max-width: 600px;">
-                <div class="mb-3"><input type="text" class="form-control" placeholder="Nombre completo" required></div>
-                <div class="mb-3"><input type="email" class="form-control" placeholder="Correo electrónico" required></div>
-                <div class="mb-3"><textarea class="form-control" rows="4" placeholder="Tu mensaje..." required></textarea></div>
-                <button type="submit" class="btn btn-primary w-100">Enviar Mensaje</button>
-            </form>
-        </div>
-    </section>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="static/js/script.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
