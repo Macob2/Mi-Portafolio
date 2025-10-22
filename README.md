@@ -1,7 +1,7 @@
-# Mi Portafolio Profesional
+# Portafolio | Desarrollador Front-end (Mi Nombre)
 
-## Propósito
-Este proyecto sirve como portafolio personal y profesional, demostrando habilidades en desarrollo Front-end (HTML, CSS, JavaScript) y cumplimiento estricto de estándares de código y funcionalidad DOM.
+## Propósito del Sitio
+Este sitio integra un Currículum Vitae (CV) interactivo con un Portafolio de proyectos. Su objetivo principal es demostrar habilidades sólidas en HTML, CSS, JavaScript y buenas prácticas de desarrollo web, con énfasis en la manipulación del DOM y diseño responsivo.
 
 ## Autor
 [Jacob Orellana]
@@ -9,13 +9,16 @@ Este proyecto sirve como portafolio personal y profesional, demostrando habilida
 ## Tecnologías Utilizadas
 * HTML5 (Estructura Semántica)
 * CSS3 (Estilos Personalizados y Flexbox)
-* JavaScript ES6 (Manipulación del DOM y Eventos con `this`)
-* Bootstrap 5.3 (Framework CSS para responsividad y componentes)
+* JavaScript ES6+ (Manipulación del DOM, Eventos, Uso de `this`)
+* Bootstrap 5.3 (Grillas y Navbar)
 
-## Instrucciones de Despliegue Local
-1.  Clona este repositorio: `git clone https://github.com/tu_usuario/tu_repositorio.git`
-2.  Navega al directorio: `cd tu_repositorio`
-3.  Abre el archivo `index.html` directamente en tu navegador.
+## Estructura y Estándares
+El código sigue una estructura profesional (`static/css`, `static/js`) y utiliza nombres de clases e IDs en español y coherentes.
+
+## Instrucciones de Visualización
+1.  Clona el repositorio.
+2.  Abre el archivo `index.html` en tu navegador.
+3.  Alternativamente, visita el enlace de GitHub Pages.
 
 ## Enlace a GitHub Pages
-[¡AQUÍ VA TU LINK FUNCIONAL DE GITHUB PAGES!]# Mi-Portafolio
+[https://tu_usuario.github.io/tu_repositorio/] (Ítem 4 - Placeholder)
