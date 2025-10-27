@@ -1,139 +1,619 @@
-/* --- Estilos de Cuerpo/Base --- */
-body {
-    font-family: 'Montserrat', sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
+/*-- 1. Variables de Color y Configuración Base --- */
+:root {
+    /* Paleta de colores de la imagen */
+    --color-navy: #1B2A41;
+    --color-dark-blue: #3B536D;
+    --color-medium-blue: #5F7D9B;
+    --color-light-blue: #9EB1C5;
+    --color-off-white: #EBF2FA;
+
+    /* Variables de la barra lateral */
+    --sidebar-width-expanded: 260px;
+    --sidebar-width-collapsed: 88px;
+    --main-transition: all 0.3s ease-in-out;
 }
 
-/* Scroll Offset (para asegurar que los anclajes funcionen correctamente) */
 html {
-    scroll-padding-top: 8vh; 
+    scroll-behavior: smooth;
 }
 
-/* Agregamos un ancho máximo a los contenedores de Bootstrap para limitar el ancho de las tarjetas y contenido general */
-.container {
-    max-width: 1300px; /* Limita el ancho del contenido a un tamaño razonable en pantallas grandes */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-off-white);
+    color: var(--color-navy);
+    /* Oculta el scroll-x causado por animaciones */
+    overflow-x: hidden; 
 }
 
-/* --- Navbar Overrides --- */
-#mainNav {
-    /* ** 1. Desactivar posición fija ** */
-    position: static !important;
-    
-    /* 2. Estilos basados en vh/vw */
-    height: 7vh; 
-    border-bottom: 0.3vh solid #007bff; 
+/* --- 2. Barra de Navegación Lateral (Sidebar) --- */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width-collapsed);
+    background-color: var(--color-navy);
+    color: var(--color-off-white);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    transition: var(--main-transition);
+    z-index: 1000;
+    overflow-x: hidden; /* Oculta contenido al colapsar */
 }
 
-.navbar-brand {
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 1.5rem !important;
+.sidebar:not(.collapsed) {
+    width: var(--sidebar-width-expanded);
+}
+
+/* Logo y Botón de Colapsar */
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    min-height: 40px;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-off-white);
+    text-decoration: none;
+    /* Oculta el texto "AB" cuando está colapsado */
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: var(--main-transition);
+}
+
+.sidebar:not(.collapsed) .sidebar-logo {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.logo-icono {
+    font-size: 1.5rem;
+    min-width: 40px; /* Alinea el icono */
+    text-align: center;
+}
+
+#sidebar-toggle {
+    background: transparent;
+    border: none;
+    color: var(--color-light-blue);
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: var(--main-transition);
+}
+
+#sidebar-toggle:hover {
+    color: var(--color-off-white);
+}
+
+/* Gira el icono al expandir */
+.sidebar:not(.collapsed) #sidebar-toggle {
+    transform: rotate(-180deg);
+}
+
+/* Enlaces de Navegación */
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1; /* Empuja el footer-nav hacia abajo */
+}
+
+.nav-item {
+    margin-bottom: 0.5rem;
 }
 
 .nav-link {
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 0.95rem !important;
-    text-transform: uppercase;
-    padding: 1vh 0.5vw !important; 
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0.5rem;
+    border-radius: 8px;
+    color: var(--color-light-blue);
+    text-decoration: none;
+    white-space: nowrap; /* Evita que el texto se parta */
+    transition: var(--main-transition);
 }
 
-/* --- Secciones y Títulos --- */
-.seccion-bloque {
-    /* Relleno vertical y horizontal con vh/vw */
-    padding: 10vh 5vw !important; 
+.nav-link i {
+    font-size: 1.25rem;
+    min-width: 40px; /* Alinea los iconos */
+    text-align: center;
+    transition: all 0.2s ease;
 }
 
+.nav-link:hover {
+    background-color: var(--color-dark-blue);
+    color: var(--color-off-white);
+    transform: translateX(5px);
+}
+
+.nav-link.active {
+    background-color: var(--color-medium-blue);
+    color: var(--color-navy);
+    font-weight: 500;
+}
+
+.nav-link.active i {
+    transform: scale(1.1);
+}
+
+/* Texto del enlace */
+.nav-link-text {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: var(--main-transition);
+}
+
+.sidebar:not(.collapsed) .nav-link-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Footer de la barra lateral (Redes) */
+.sidebar-footer {
+    border-top: 1px solid var(--color-dark-blue);
+    padding-top: 1rem;
+}
+
+
+/* --- 3. Contenido Principal --- */
+#main-content {
+    position: relative;
+    padding-left: var(--sidebar-width-collapsed);
+    transition: var(--main-transition);
+    width: 100%;
+}
+
+.sidebar:not(.collapsed) ~ #main-content {
+    padding-left: var(--sidebar-width-expanded);
+}
+
+section {
+    /* Padding estándar para secciones */
+    padding: 100px 5%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Estilo para títulos de sección */
 .titulo-seccion {
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 2.5rem !important; 
-    margin-bottom: 5vh !important; 
-    text-transform: uppercase;
-    color: #007bff !important; 
-    font-family: 'Oswald', sans-serif !important;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-dark-blue);
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
 }
 
-/* --- Sección HOME (Hero) --- */
-#home {
-    /* Altura ajustada */
-    min-height: 93vh; 
+.titulo-seccion::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 4px;
+    background-color: var(--color-medium-blue);
 }
 
-#home h1 {
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 4rem !important; 
+/* --- 4. Secciones Específicas --- */
+
+/* Sección: Inicio (Hero) */
+#inicio {
+    background-color: var(--color-off-white);
+    min-height: 100vh;
 }
 
-#home p {
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 1.5rem !important; 
-    margin-top: 3vh !important;
-    margin-bottom: 5vh !important;
+.hero-content {
+    max-width: 700px;
 }
 
-/* Botón CTA */
-.cta-btn {
-    /* Usamos REM para estabilidad en el texto */
-    padding: 2vh 4vw !important; 
-    font-size: 1.2rem !important;
+.hero-saludo {
+    color: var(--color-medium-blue);
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
 }
 
-/* --- Sección About --- */
-.foto-perfil {
-    width: 200px !important; /* Volvemos a PX para el tamaño de la imagen, ya que vh/vw lo hacía ver mal */
-    height: 200px !important;
-    border: 0.5vh solid #1a1a1a !important;
-    border-radius: 50% !important;
-    margin-bottom: 3vh !important;
+.hero-titulo {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 0.5rem 0;
 }
 
-#about p, #about h4 {
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 1.1rem !important;
+.hero-subtitulo {
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-dark-blue);
+    margin-bottom: 1.5rem;
 }
 
-/* Barras de progreso de habilidades */
-.progress {
-    height: 3vh !important;
+.hero-descripcion {
+    font-size: 1.1rem;
+    color: var(--color-dark-blue);
+    margin-bottom: 2rem;
+    line-height: 1.7;
 }
 
-/* --- Sección Portafolio (Card) --- */
-
-.portfolio-card {
-    border: 0.1vh solid #ddd !important;
-    margin: 1vh !important; 
-    padding: 2vh !important;
-    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
-}
-.portfolio-card:hover {
-    transform: translateY(-0.5vh) !important;
-    box-shadow: 0 1vh 2vh rgba(0, 0, 0, 0.1) !important;
-}
-.portfolio-card h5 { 
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 1.4rem !important; 
-    margin-bottom: 1vh !important; 
-}
-.portfolio-card p { 
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 0.9rem !important; 
-    margin-bottom: 2vh !important; 
-}
-.portfolio-card a, .portfolio-card button { 
-    /* Usamos REM para estabilidad en el texto */
-    font-size: 0.9rem !important; 
+.btn-principal {
+    background-color: var(--color-medium-blue);
+    color: var(--color-off-white);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--main-transition);
+    border: 2px solid var(--color-medium-blue);
 }
 
-/* --- Sección Contacto --- */
-#contact input, #contact textarea {
-    /* Usamos REM para estabilidad en el texto */
-    padding: 1.5vh !important;
-    margin-bottom: 2vh !important;
-    font-size: 1rem !important;
+.btn-principal:hover {
+    background-color: var(--color-dark-blue);
+    border-color: var(--color-dark-blue);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-#contact button {
-    /* Usamos REM para estabilidad en el texto */
-    padding: 1.5vh !important;
-    font-size: 1.3rem !important;
+.btn-secundario {
+    background-color: transparent;
+    color: var(--color-medium-blue);
+    border: 2px solid var(--color-medium-blue);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--main-transition);
+    margin-left: 1rem;
+}
+
+.btn-secundario:hover {
+    background-color: var(--color-medium-blue);
+    color: var(--color-off-white);
+    transform: translateY(-3px);
+}
+
+/* Sección: Sobre Mí */
+#sobre-mi {
+    background-color: #ffffff;
+}
+
+.sobre-mi-texto {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--color-dark-blue);
+}
+
+.sobre-mi-foto {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 15px;
+    border: 5px solid var(--color-light-blue);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Sección: Habilidades */
+#habilidades {
+    background-color: var(--color-off-white);
+}
+
+.card-habilidad {
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: var(--main-transition);
+}
+
+.card-habilidad:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card-habilidad i {
+    font-size: 3rem;
+    color: var(--color-medium-blue);
+    margin-bottom: 1rem;
+}
+
+.card-habilidad h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    margin-bottom: 0.5rem;
+}
+
+.card-habilidad p {
+    font-size: 0.9rem;
+    color: var(--color-dark-blue);
+    background-color: var(--color-light-blue);
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+}
+
+/* Sección: Educación */
+#educacion {
+    background-color: #ffffff;
+}
+
+.card-educacion {
+    background-color: var(--color-off-white);
+    border: 1px solid var(--color-light-blue);
+    border-radius: 10px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.card-educacion i {
+    font-size: 2.5rem;
+    color: var(--color-medium-blue);
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.card-educacion h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-navy);
+    margin: 0;
+}
+
+.card-educacion p {
+    font-size: 1rem;
+    color: var(--color-dark-blue);
+    margin: 0;
+}
+
+/* Sección: Portafolio */
+#portafolio {
+    background-color: var(--color-off-white);
+}
+
+.card-proyecto {
+    background-color: #ffffff;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: var(--main-transition);
+    overflow: hidden; /* Para la imagen */
+    /* Borde para onmouseover de JS */
+    border: 3px solid transparent; 
+    cursor: pointer;
+}
+
+/* CSS :hover (Requerido por checklist) */
+.card-proyecto:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.card-proyecto-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    filter: grayscale(30%);
+    transition: var(--main-transition);
+}
+
+.card-proyecto:hover .card-proyecto-img {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+}
+
+.card-proyecto .card-body {
+    padding: 1.5rem;
+}
+
+.card-proyecto .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-navy);
+}
+
+.card-proyecto .card-text {
+    color: var(--color-dark-blue);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.card-proyecto .btn-ver-repo {
+    background-color: var(--color-dark-blue);
+    color: var(--color-off-white);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: var(--main-transition);
+}
+
+.card-proyecto .btn-ver-repo:hover {
+    background-color: var(--color-navy);
+}
+
+/* Sección: Contacto */
+#contacto {
+    background-color: #ffffff;
+}
+
+.form-control {
+    background-color: var(--color-off-white);
+    border: 1px solid var(--color-light-blue);
+    padding: 0.75rem;
+    border-radius: 8px;
+}
+
+.form-control:focus {
+    background-color: #ffffff;
+    border-color: var(--color-medium-blue);
+    box-shadow: 0 0 0 0.25rem rgba(95, 125, 155, 0.25);
+}
+
+#validation-message {
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* --- 5. Animaciones de Scroll --- */
+.animar {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+}
+
+.animar.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Añadir retrasos para escalonar animaciones */
+.animar.delay-1 { transition-delay: 0.1s; }
+.animar.delay-2 { transition-delay: 0.2s; }
+.animar.delay-3 { transition-delay: 0.3s; }
+.animar.delay-4 { transition-delay: 0.4s; }
+
+
+/* --- 6. Responsividad --- */
+@media (max-width: 992px) {
+    /* Colapsar barra lateral en tablet/móvil */
+    .sidebar {
+        width: var(--sidebar-width-collapsed);
+    }
+    
+    .sidebar:not(.collapsed) {
+        width: var(--sidebar-width-collapsed);
+    }
+    
+    /* Ocultar texto y botón de toggle */
+    .sidebar .nav-link-text,
+    .sidebar:not(.collapsed) .nav-link-text,
+    .sidebar .sidebar-logo,
+    .sidebar:not(.collapsed) .sidebar-logo,
+    #sidebar-toggle {
+        display: none;
+    }
+    
+    .sidebar-header {
+        justify-content: center; /* Centra el icono del logo */
+    }
+
+    #main-content {
+        padding-left: var(--sidebar-width-collapsed);
+    }
+    
+    .sidebar:not(.collapsed) ~ #main-content {
+        padding-left: var(--sidebar-width-collapsed);
+    }
+
+    section {
+        padding: 80px 3%;
+    }
+
+    .hero-titulo { font-size: 2.5rem; }
+    .hero-subtitulo { font-size: 1.5rem; }
+    .titulo-seccion { font-size: 2rem; }
+}
+
+@media (max-width: 768px) {
+    /* Mover la barra lateral abajo en móviles */
+    .sidebar {
+        width: 100%;
+        height: 70px;
+        bottom: 0;
+        top: auto; /* Anula el 'top: 0' */
+        left: 0;
+        flex-direction: row;
+        align-items: center;
+        padding: 0;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .sidebar-header, .sidebar-footer {
+        display: none; /* Oculta logo y redes en móvil */
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+    }
+
+    .nav-item {
+        margin: 0;
+        flex-grow: 1; /* Distribuye espacio */
+    }
+    
+    .nav-link {
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.25rem;
+        padding: 0.5rem;
+        border-radius: 0;
+    }
+
+    .nav-link i {
+        font-size: 1.1rem;
+        margin: 0;
+        min-width: auto;
+    }
+    
+    .nav-link-text {
+        /* El texto es visible en móvil */
+        opacity: 1;
+        transform: none;
+        font-size: 0.7rem;
+    }
+    
+    .nav-link:hover, .nav-link.active {
+        transform: none;
+        background-color: var(--color-dark-blue);
+        color: var(--color-off-white);
+    }
+
+    /* Ajuste de contenido principal */
+    #main-content {
+        padding-left: 0;
+        padding-bottom: 70px; /* Espacio para la barra inferior */
+    }
+    
+    section {
+        min-height: auto; /* Altura auto en móvil */
+        padding: 60px 5%;
+    }
+    
+    /* La primera sección (inicio) necesita padding-bottom extra */
+    #inicio {
+        padding-top: 60px;
+        text-align: center;
+    }
+    
+    .hero-botones {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .btn-secundario {
+        margin-left: 0;
+    }
+    
+    .sobre-mi-foto {
+        margin-top: 2rem;
+    }
 }
