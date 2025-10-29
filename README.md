@@ -16,4 +16,4 @@ Este sitio integra un Currículum Vitae (CV) interactivo con un Portafolio de pr
 El código sigue una estructura profesional (`static/css`, `static/js`) y utiliza nombres de clases e IDs en español y coherentes.
 
 ## Enlace a GitHub Pages
-[](https://macob2.github.io/Mi-Portafolio/) 
+https://macob2.github.io/Mi-Portafolio/
