@@ -1,9 +1,9 @@
 :root {
-    --color-navy: #1B2A41;
-    --color-dark-blue: #3B536D;
-    --color-medium-blue: #5F7D9B;
-    --color-light-blue: #9EB1C5;
-    --color-off-white: #EBF2FA;
+    --color-navy: #261b41;
+    --color-dark-blue: #4a3b6d;
+    --color-medium-blue: #6f5f9b;
+    --color-light-blue: #af9ec5;
+    --color-off-white: #f1ebfa;
 
     --sidebar-width-expanded: 260px;
     --sidebar-width-collapsed: 88px;
