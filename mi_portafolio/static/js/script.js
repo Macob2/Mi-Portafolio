@@ -1,111 +1,156 @@
-// --- 0. Ejecutar cuando el DOM esté listo ---
-// Usamos DOMContentLoaded para asegurar que el HTML está cargado
-// antes de intentar seleccionar elementos.
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. Lógica de la Barra Lateral (Sidebar) ---
-    const sidebar = document.getElementById('sidebar');
-    const toggleButton = document.getElementById('sidebar-toggle');
+    const sidebar = document.getElementById('barra-lateral');
+    const toggleButton = document.getElementById('interruptor-barra-lateral');
 
     if (toggleButton) {
-        // Evento click en el botón de colapsar
         toggleButton.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
+            sidebar.classList.toggle('colapsado');
         });
     }
 
-    // --- 2. Lógica de Navegación Activa (Scrollspy) ---
-    // Resalta el enlace de la sección visible
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+    const navLinks = document.querySelectorAll('.nav-barra-lateral .enlace-nav');
 
-    const activateNavLink = () => {
+    const activarEnlaceNav = () => {
         let index = sections.length;
-
-        // Recorre las secciones desde abajo hacia arriba
-        while(--index && window.scrollY + 100 < sections[index].offsetTop) {} // 100px de offset
-
-        // Quita la clase 'active' de todos los enlaces
-        navLinks.forEach((link) => link.classList.remove('active'));
-        
-        // Añade 'active' solo al enlace correspondiente
+        while(--index && window.scrollY + 100 < sections[index].offsetTop) {} 
+        navLinks.forEach((link) => link.classList.remove('activo'));
         if (navLinks[index]) {
-             navLinks[index].classList.add('active');
+             navLinks[index].classList.add('activo');
         }
     };
+    activarEnlaceNav();
+    window.addEventListener('scroll', activarEnlaceNav);
 
-    // Activar al cargar la página y al hacer scroll
-    activateNavLink();
-    window.addEventListener('scroll', activateNavLink);
+    const heroTimeline = anime.timeline({
+        easing: 'easeOutExpo',
+        delay: 500 
+    });
+    
+    heroTimeline
+    .add({
+        targets: '.saludo-hero',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    })
+    .add({
+        targets: '.titulo-hero',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    }, '-=600') 
+    .add({
+        targets: '.subtitulo-hero', 
+        opacity: [0, 1],
+        duration: 500
+    }, '-=600')
+    .add({
+        targets: '.descripcion-hero',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    }, '-=600')
+    .add({
+        targets: '.botones-hero',
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    }, '-=600')
+    .add({
+        targets: '.contenedor-logos-tech', 
+        opacity: [0, 1],
+        translateY: [20, 0],
+        duration: 800
+    }, '-=600')
+    .add({
+        targets: '.contenedor-estatico-tech', 
+        opacity: [0, 1],
+        scale: [0.8, 1],
+        duration: 1000
+    }, '-=600');
 
-    // --- 3. Lógica de Animaciones al Hacer Scroll ---
-    // Usa IntersectionObserver para animar elementos cuando entran en la vista
+    heroTimeline.finished.then(iniciarEscritura);
+
+    anime({
+        targets: '#inicio .btn-principal',
+        scale: [1, 1.03], 
+        boxShadow: [
+            '0 0 0 0 rgba(95, 125, 155, 0.4)',
+            '0 0 0 12px rgba(95, 125, 155, 0)'
+        ],
+        duration: 2500,
+        easing: 'easeOutExpo',
+        loop: true,
+        delay: 2000 
+    });
+
+    function iniciarEscritura() {
+        const typingElement = document.getElementById('subtitulo-escribiendo');
+        if (typingElement) {
+            const textToType = typingElement.getAttribute('data-text');
+            let index = 0;
+            typingElement.innerHTML = ''; 
+            
+            function type() {
+                if (index < textToType.length) {
+                    typingElement.innerHTML += textToType.charAt(index);
+                    index++;
+                    setTimeout(type, 80); 
+                } else {
+                    typingElement.innerHTML += '<span class="cursor-escribiendo">|</span>';
+                }
+            }
+            type(); 
+        }
+    }
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            // Si el elemento está intersectando (visible)
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Dejar de observar una vez animado
+                anime({
+                    targets: entry.target,
+                    translateY: [30, 0],
+                    scale: [0.98, 1],
+                    opacity: [0, 1],
+                    duration: 1000,
+                    easing: 'easeOutExpo',
+                    delay: entry.target.dataset.delay || 0
+                });
+                observer.unobserve(entry.target); 
             }
         });
     }, {
-        threshold: 0.1 // Activar cuando el 10% del elemento es visible
+        threshold: 0.1 
     });
 
-    // Observar todos los elementos con la clase '.animar'
     document.querySelectorAll('.animar').forEach(element => {
         observer.observe(element);
     });
 
 });
 
-
-// --- 4. Eventos de la Lista de Cotejo (usando 'this') ---
-// Estas funciones se llaman directamente desde el HTML (onclick, onmouseover, etc.)
-
-/**
- * Item 10: Evento onclick en las tarjetas de proyecto.
- * Abre el enlace del repositorio en una nueva pestaña.
- * @param {HTMLElement} element - El elemento (this) que recibió el clic.
- */
-function handleClick(element) {
-    const link = element.dataset.link; // Obtiene 'data-link' del HTML
+function manejarClick(element) {
+    const link = element.dataset.link; 
     if (link) {
         window.open(link, '_blank');
     }
 }
 
-/**
- * Item 8 y 13: Evento onmouseover en las tarjetas de proyecto.
- * Cambia el estilo del borde y la sombra.
- * @param {HTMLElement} element - El elemento (this) sobre el que está el cursor.
- */
-function handleMouseOver(element) {
-    // 'this' (pasado como 'element') se refiere a la .card-proyecto
+function manejarMouseSobre(element) {
     element.style.borderColor = 'var(--color-medium-blue)';
-    element.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)'; // Aumentar sombra
+    element.style.boxShadow = '0 10px 25px rgba(0,0,0,0.15)'; 
 }
 
-/**
- * Item 9: Evento onmouseout en las tarjetas de proyecto.
- * Restaura el estilo original del borde y la sombra.
- * @param {HTMLElement} element - El elemento (this) del que salió el cursor.
- */
-function handleMouseOut(element) {
-    // 'this' (pasado como 'element') se refiere a la .card-proyecto
-    element.style.borderColor = 'transparent'; // Restaurar borde
-    element.style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)'; // Sombra original
+function manejarMouseFuera(element) {
+    element.style.borderColor = 'transparent'; 
+    element.style.boxShadow = '0 5px 15px rgba(0,0,0,0.05)'; 
 }
 
-/**
- * Item 11: Evento onchange en el input de email.
- * Valida el formato del correo.
- * @param {HTMLInputElement} input - El input (this) que cambió.
- */
-function validateEmail(input) {
-    // 'this' (pasado como 'input') se refiere al input#email
+function validarEmail(input) {
     const email = input.value;
-    const validationMessage = document.getElementById('validation-message');
+    const validationMessage = document.getElementById('mensaje-validacion');
     
     if (email && !email.includes('@')) {
         validationMessage.textContent = 'Por favor, introduce un correo válido.';
@@ -118,26 +163,22 @@ function validateEmail(input) {
     }
 }
 
-/**
- * Maneja el envío del formulario de contacto.
- * @param {Event} event - El evento de envío del formulario.
- */
-function handleFormSubmit(event) {
-    event.preventDefault(); // Evita que la página se recargue
+function manejarEnvioFormulario(event) {
+    event.preventDefault(); 
     
-    const contactForm = document.getElementById('contact-form');
-    const submitButton = document.getElementById('submit-button');
-    const validationMessage = document.getElementById('validation-message');
+    const contactForm = document.getElementById('formulario-contacto');
+    const submitButton = document.getElementById('boton-enviar');
+    const validationMessage = document.getElementById('mensaje-validacion');
 
-    // Simular envío
     submitButton.innerHTML = '<i class="fa-solid fa-check me-2"></i> ¡Enviado!';
     submitButton.disabled = true;
 
-    // Resetear el formulario después de 3 segundos
     setTimeout(() => {
          submitButton.innerHTML = 'Enviar Mensaje';
          submitButton.disabled = false;
-         contactForm.reset(); // Limpiar formulario
-         validationMessage.textContent = ''; // Limpiar validación
+         contactForm.reset(); 
+         if(validationMessage) {
+            validationMessage.textContent = ''; 
+         }
     }, 3000);
 }
