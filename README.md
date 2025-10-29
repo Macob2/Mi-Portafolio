@@ -1,4 +1,4 @@
-# Portafolio | Desarrollador Front-end (Mi Nombre)
+# Portafolio | Desarrollador Front-end (Jacob Orellana)
 
 ## Propósito del Sitio
 Este sitio integra un Currículum Vitae (CV) interactivo con un Portafolio de proyectos. Su objetivo principal es demostrar habilidades sólidas en HTML, CSS, JavaScript y buenas prácticas de desarrollo web, con énfasis en la manipulación del DOM y diseño responsivo.
